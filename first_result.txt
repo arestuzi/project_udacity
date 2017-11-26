@@ -1,0 +1,37 @@
+621
+debug: sum of call[3] is: 621
+898
+debug: sum of call[3] is: 1519
+612
+debug: sum of call[3] is: 2131
+2993
+debug: sum of call[3] is: 5124
+2745
+debug: sum of call[3] is: 7869
+69
+debug: sum of call[3] is: 7938
+107
+debug: sum of call[3] is: 8045
+2446
+debug: sum of call[3] is: 10491
+1006
+debug: sum of call[3] is: 11497
+110
+debug: sum of call[3] is: 11607
+538
+debug: sum of call[3] is: 12145
+2653
+debug: sum of call[3] is: 14798
+1032
+debug: sum of call[3] is: 15830
+2918
+debug: sum of call[3] is: 18748
+3224
+debug: sum of call[3] is: 21972
+154
+debug: sum of call[3] is: 22126
+2776
+debug: sum of call[3] is: 24902
+462
+debug: sum of call[3] is: 25364
+{'98444 72482': 15948, '98446 78140': 9416}
