@@ -40,11 +40,33 @@ to other fixed lines in Bangalore."
 注意：百分比应包含2位小数。
 """
 calls_by_bangalore = []
+codes = []
+total_calls_from_bangalore = 0
+calls_to_local = 0
 
 for call in calls:
-  #  if call[0][0] == '(' and call[0][1] == '0' and call[0][2] == '8' and call[0][3] == '0':
     if call[0][:5] == '(080)':
-        if call[0] not in calls_by_bangalore:
+        if call[1] not in calls_by_bangalore:
             calls_by_bangalore.append(call[1])
 
-print(calls_by_bangalore)
+for call_by_bangalore in calls_by_bangalore:
+    if call_by_bangalore[0] == '(':
+        if call_by_bangalore[1:4] not in codes:
+            codes.append(call_by_bangalore[1:4])
+    if call_by_bangalore[5] == " " and (call_by_bangalore[0] == "7" or call_by_bangalore[0] == "8" or call_by_bangalore[0] == "9"):
+        if call_by_bangalore[:4] not in codes:
+            codes.append(call_by_bangalore[:4])
+sorted_codes = sorted(codes)           
+
+print("\"The numbers called by people in Bangalore have codes:\"")
+for sorted_code in sorted_codes:
+    print(sorted_code)
+
+
+for call in calls:
+    if call[0][:5] == '(080)':
+        total_calls_from_bangalore += 1
+        if call[1][:5] == '(080)':
+            calls_to_local += 1
+print("%.2f percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore." % ((calls_to_local / total_calls_from_bangalore) * 100))
+

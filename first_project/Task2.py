@@ -39,6 +39,4 @@ for number in phone_number:
     if phone_number[number] > max_time:
         max_time = phone_number[number]
         telephone_number = number
-        print("debug: max time is: {}".format(max_time))
-        print(str(phone_number[number]) + " " + number)
-print("\"{} spent the longest time, {} seconds, on the phone during September 2016.\"".format(telephone_number, max_time))
+print("{} spent the longest time, {} seconds, on the phone during September 2016.".format(telephone_number, max_time))

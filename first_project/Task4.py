@@ -42,12 +42,14 @@ for call in calls:
     if call[0] not in send_receive_text_phone and call[0] not in receive_phone:
         telemarketers.append(call[0])
 
-print("\"These numbers could be telemarketers: \"")
+print("These numbers could be telemarketers: ")
 unique_telemarketers = []
 for telemarketer in telemarketers:
     if telemarketer not in unique_telemarketers:
         unique_telemarketers.append(telemarketer)
 
-for unique_telemarketer in unique_telemarketers:
-    print(unique_telemarketer)
+sorted_telemarketers = sorted(unique_telemarketers)
+
+for sorted_telemarketer in sorted_telemarketers:
+    print(sorted_telemarketer)
 

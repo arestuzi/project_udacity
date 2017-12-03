@@ -35,5 +35,5 @@ for call in calls:
     elif call[1] not in text_phones:
         text_phones.append(call[1])
         count += 1
-print("\"There are {} different telephone numbers in the records.\"".format(count))
+print("There are {} different telephone numbers in the records.".format(count))
 
