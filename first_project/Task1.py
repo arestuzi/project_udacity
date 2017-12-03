@@ -24,7 +24,7 @@ for text in texts:
     if text[0] not in text_phones:
         text_phones.append(text[0])
         count += 1
-    elif text[1] not in text_phones:
+    if text[1] not in text_phones:
         text_phones.append(text[1])
         count += 1
 
@@ -32,7 +32,7 @@ for call in calls:
     if call[0] not in text_phones:
         text_phones.append(call[0])
         count += 1
-    elif call[1] not in text_phones:
+    if call[1] not in text_phones:
         text_phones.append(call[1])
         count += 1
 print("There are {} different telephone numbers in the records.".format(count))

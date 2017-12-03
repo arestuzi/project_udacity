@@ -27,11 +27,11 @@ sum_call = 0
 for call in calls:
     if call[0] not in phone_number:
         phone_number[call[0]] = int(call[3])
-    elif call[0] in phone_number:
+    if call[0] in phone_number:
         phone_number[call[0]] += int(call[3])
-    elif call[1] not in phone_number:
+    if call[1] not in phone_number:
         phone_number[call[1]] = int(call[3])
-    elif call[1] in phone_number:
+    if call[1] in phone_number:
         phone_number[call[1]] += int(call[3])
 
 max_time = 0
