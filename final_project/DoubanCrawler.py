@@ -25,13 +25,12 @@ def getMovieUrl(category, location):
     """
     Return a string corresponding to the URL of douban movie lists given category and location.
     """
-    if location == '全部地区': url = base_url + ',' + category
-    else: url = base_url + ','+ category + ',' + location
+    url = base_url + ','+ category + ',' + location
     return url
-    
+
 def getMovies(category, location):
     """
-    Capture and format the information of movies 
+    Capture and format the information of movies
     """
     movies = []
     locations = checkLocation(category,location)
@@ -39,7 +38,7 @@ def getMovies(category, location):
     for location in locations:
         url = getMovieUrl(category, location)
         html = expanddouban.getHtml(url, loadmore = True)
-        soup = BeautifulSoup(html, 'html.parser')       
+        soup = BeautifulSoup(html, 'html.parser')
         for obj in soup.find('div', class_="list-wp").find_all('a', target="_blank"):
             object = []
             object.append(obj.p.find('span', class_="title").get_text())
@@ -52,37 +51,22 @@ def getMovies(category, location):
 
     return movies
 
-def selectCategory():
-    """
-    Return the category and location selected from website
-    """
-    while True:
-        html = expanddouban.getHtml(base_url, loadmore = False)
-        soup = BeautifulSoup(html, 'html.parser')
-        keywords = []
-        for keyword in soup.find_all('span', class_='tag-checked'):
-            keywords.append(keyword.get_text())
-        category = keywords[1]        
-        location = keywords[2]
-        if category != '全部类型': break
-    return category, location
-
 def writeCsvFile(fname, data):
     """
     Write and append if the file exists.
     """
     if not os.path.isfile(fname):
-        csvfile = open(fname, 'w', newline='')
+        csvfile = open(fname, 'w', encoding='utf-8', newline='')
         writer = csv.writer(csvfile)
         writer.writerows(data)
         csvfile.close()
     else:
-        csvfile = open(fname, 'a', newline='')
+        csvfile = open(fname, 'a', encoding='utf-8', newline='')
         writer = csv.writer(csvfile)
         writer.writerows(data)
         csvfile.close()
-        
-    
+
+
 
 def checkLocation(category,location):
     """
@@ -106,11 +90,11 @@ def topThree(fname, categories):
     """
     Find out the TOP 3 movies for each category
     """
-    with open(fname, 'r') as f:
+    with open(fname, 'r', encoding='utf-8') as f:
         reader = csv.reader(f)
         movies = list(reader)
 
-    f = open('output.txt', 'w')
+    f = open('output.txt', 'w', encoding='utf-8')
     total_movies = {}
     for category in categories:
         locations = {}
@@ -129,25 +113,22 @@ def topThree(fname, categories):
         print("数量排名前三的地区及占总数的百分比: ", end=" ",file=f)
         for i in range(3):
             result  = "%.2f" % (locations_sorted_by_value[i][1] / total_movies[category] * 100 )
-            print(locations_sorted_by_value[i][0] + str(result) + "%", end=" ", file=f)  
+            print(locations_sorted_by_value[i][0] + str(result) + "%", end=" ", file=f)
         print("", file=f)
     f.close()
 
 fname = 'movies.csv'
-categories = []
+categories = ["恐怖", "剧情", "战争"]
+location = '全部地区'
 if os.path.isfile(fname):
     try:
         os.remove(fname)
     except:
         print("This should not display")
 
-for i in range(3):
-    print(f"Enter {i} category")
-    category, location = selectCategory()
-    time.sleep(1)
+for category in categories:
     movies = getMovies(category, location)
     writeCsvFile(fname, movies)
-    categories.append(category)
 
 topThree(fname, categories)
 
